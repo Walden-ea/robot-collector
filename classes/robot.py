@@ -1,5 +1,6 @@
 import math
 
+import nav_system
 from classes.sensor import Sensor
 
 
@@ -15,10 +16,9 @@ class Robot:
             sensor_count: int = 3,
             sensor_length: float = 10.0,
             starting_location: tuple = (0.0, 0.0),
-            direction: float = 0.0,  # TODO decide wether we need to store velocity in one piece or separately
+            direction: float = 0.0,  # TODO decide whether we need to store velocity in one piece or separately
             speed: float = 0.0,
             capacity: int = 10):
-
 
         if item_count > 0:
             self.item_count = item_count
@@ -36,4 +36,8 @@ class Robot:
         if capacity > 0:
             self.capacity = capacity
 
-#    def tick(self):
+    def tick(self):
+        for sensor in self.sensors:
+            sensor.update_collision()
+        self.speed, self.direction = nav_system.calc()
+

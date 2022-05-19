@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89b30ee7-4b0a-4b40-98fc-448140662193" name="Changes" comment="" />
+    <list default="true" id="89b30ee7-4b0a-4b40-98fc-448140662193" name="Changes" comment="Add basic robot and its sensor classes">
+      <change afterPath="$PROJECT_DIR$/nav_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/robot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/sensor.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,9 +22,6 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/venv/main.py" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="ProjectId" id="29NQ7jUmGTKRhaFSreX2C0PHxCm" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -29,7 +31,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/venv/main.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/main.py" />
   </component>
   <component name="ReaderModeSettings">
     <option name="enabled" value="false" />
@@ -43,11 +45,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="C:\Users\Elena\Documents\вуз\неклы\Проект\robot-collector\venv\Scripts\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/venv" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/venv/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -66,6 +68,51 @@
       <option name="presentableId" value="Default" />
       <updated>1652950897771</updated>
     </task>
+    <task id="LOCAL-00001" summary="Set up pygame window and its loop">
+      <created>1652953263624</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1652953263624</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Set up pygame window and its loop">
+      <created>1652953311049</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652953311049</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Set up pygame window and its loop">
+      <created>1652953463895</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1652953463895</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Add basic robot and its sensor classes">
+      <created>1652968119106</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652968119106</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Set up pygame window and its loop" />
+    <MESSAGE value="Add basic robot and its sensor classes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add basic robot and its sensor classes" />
   </component>
 </project>
