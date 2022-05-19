@@ -2,6 +2,8 @@ import math
 
 import nav_system
 from classes.sensor import Sensor
+from pygame import Vector2
+import helper
 
 
 class Robot:
@@ -15,9 +17,9 @@ class Robot:
             radius: float,
             sensor_count: int = 3,
             sensor_length: float = 10.0,
-            starting_location: tuple = (0.0, 0.0),
-            direction: float = 0.0,  # TODO decide whether we need to store velocity in one piece or separately
-            speed: float = 0.0,
+            x: float = 0,
+            y: float = 0,
+            velocity: Vector2 = (0, 0),
             capacity: int = 10):
 
         if item_count > 0:
@@ -29,15 +31,29 @@ class Robot:
 
         # if (is_free(location,mask(self),radius)): TODO free space checker func if needed in future
 
-        self.location = starting_location
-        self.direction = direction
-        if speed >= 0:
-            self.speed = speed
+        self.x = x
+        self.y = y
+        #self.direction = direction
+        #if speed >= 0:
+        #    self.speed = speed
+        self.velocity = velocity
         if capacity > 0:
             self.capacity = capacity
+
+    def decide_on_rubbish(self):
+        pass # TODO implement
+
+    def perform_movement(self):
+        self.x = self.x + self.velocity.x
+        self.y = self.y + self.velocity.y
 
     def tick(self):
         for sensor in self.sensors:
             sensor.update_collision()
-        self.speed, self.direction = nav_system.calc()
+        self.velocity = helper.to_velosity(nav_system.calc())
+        #self.speed, self.direction = nav_system.calc()
+        self.decide_on_rubbish()
+        self.perform_movement()
+
+#TODO enum for patrol/going to container modes
 
