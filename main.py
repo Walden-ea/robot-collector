@@ -3,20 +3,30 @@ import sys
 
 #you may refactor it however you please
 
-
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
 def draw(screen, x, y):
-    screen.fill((255, 255, 255))
-    pg.draw.rect(screen, (0, 0, 255), (300, 200, 70,70)) #example of a blue rectangle
+    screen.fill((242, 208, 202))
+    pg.draw.rect(screen, (163, 178, 217), (40, 40, 850,710))
+    pg.draw.rect(screen, (0, 0, 0), (40, 40, 850, 710),2)
+    pg.draw.rect(screen, (250, 236, 234), (950, 40, 300, 500))
+    pg.draw.rect(screen, (0, 0, 0), (950, 40, 300, 500), 2)
+    pg.draw.rect(screen, (130, 206, 207), (950, 600, 300, 150))
+    pg.draw.rect(screen, (0, 0, 0), (950, 600, 300, 150), 2)
+    pg.font.init()
+    my_font = pg.font.SysFont('Comic Sans MS', 30)
+    text_log = my_font.render('Лог', True, (0, 0, 0))
+    text_more_garbage = my_font.render('Больше мусора!', True, (0, 0, 0))
+    screen.blit(text_log, (1075 , 40))
+    screen.blit(text_more_garbage, (990, 650))
     pg.display.update()
 
 
 def main():
-    screen = pg.display.set_mode((600, 400))
+    screen = pg.display.set_mode((1300, 800))
     fps = 60
     clock = pg.time.Clock()
-    x = 300
-    y = 300
+    x = 900
+    y = 800
 
 
     pg.display.set_caption("Робот-сборщик мусора")
