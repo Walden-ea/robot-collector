@@ -1,7 +1,7 @@
 import math
 
 import nav_system
-from classes.sensor import Sensor
+from sensor import Sensor
 from pygame import Vector2
 import helper
 
