@@ -3,7 +3,7 @@
 class Map_item:
     '''
     (todo docs)
-    class for a garbage
+    classes for a garbage
     '''
 
     # initializing garbage

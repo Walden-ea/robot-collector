@@ -1,13 +1,14 @@
 import pygame as pg
 import sys
+import classes.nav_system
 
-#you may refactor it however you please
+# you may refactor it however you please
 
 
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
 def draw(screen, x, y):
     screen.fill((255, 255, 255))
-    pg.draw.rect(screen, (0, 0, 255), (300, 200, 70,70)) #example of a blue rectangle
+    pg.draw.rect(screen, (0, 0, 255), (300, 200, 70, 70))  # example of a blue rectangle
     pg.display.update()
 
 
@@ -18,13 +19,13 @@ def main():
     x = 300
     y = 300
 
-
+    classes.nav_system.speed_very_slow()
     pg.display.set_caption("Робот-сборщик мусора")
     while True:
         for i in pg.event.get():
             if i.type == pg.QUIT:
                 sys.exit()
-            draw(screen,x,y)
+            draw(screen, x, y)
             clock.tick(fps)
 
 

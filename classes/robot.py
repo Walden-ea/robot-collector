@@ -1,15 +1,15 @@
 import math
 
-import nav_system
-from sensor import Sensor
+from . import nav_system
+from .sensor import Sensor
 from pygame import Vector2
-import helper
+from  . import helper
 
 
 class Robot:
     '''
     (todo docs)
-     class for a robot
+     classes for a robot
     '''
 
     def __init__(self,
@@ -51,7 +51,7 @@ class Robot:
         for sensor in self.sensors:
             sensor.update_collision()
         self.velocity = helper.to_velosity(nav_system.calc())
-        #self.speed, self.direction = nav_system.calc()
+        #self.speed, self.direction = calc()
         self.decide_on_rubbish()
         self.perform_movement()
 

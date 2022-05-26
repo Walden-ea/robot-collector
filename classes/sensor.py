@@ -4,7 +4,7 @@ import math
 class Sensor:
     '''
     (todo docs)
-    class for robot sensors
+    classes for robot sensors
     '''
     def __init__(self, length, angle, collision):
         #probably will have to have a rect attached
