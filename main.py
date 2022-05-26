@@ -6,7 +6,7 @@ import sys
 # you may refactor it however you please
 
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
-from window import draw_background
+from classes.window import draw_background
 
 WINDOW_WIDTH = 900
 WINDOW_HIGHT = 800
