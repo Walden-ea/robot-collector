@@ -2,9 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89b30ee7-4b0a-4b40-98fc-448140662193" name="Changes" comment="update robot behavior on each tick">
-      <change afterPath="$PROJECT_DIR$/classes/helper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/map.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/pathfinder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/robot-collector.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/robot-collector.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/map_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/map_item.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/nav_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/nav_system.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/robot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/sensor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/window.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +52,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Elena\Documents\вуз\неклы\Проект\robot-collector\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
@@ -115,11 +124,22 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Set up pygame window and its loop" />
     <MESSAGE value="Add basic robot and its sensor classes" />
     <MESSAGE value="update robot behavior on each tick" />
     <option name="LAST_COMMIT_MESSAGE" value="update robot behavior on each tick" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
