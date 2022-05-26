@@ -129,4 +129,6 @@ dmypy.json
 .pyre/
 
 #for pycharm
-.idea
+.idea/workspace.xml
+usage.statistics.xml
+shelf/
