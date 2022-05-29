@@ -20,3 +20,4 @@ def draw_robot(screen,robot):
     # эта штука обвиосли временная
     robot_rect = pg.Rect((robot.x, robot.y), (robot.radius,robot.radius))
     pg.draw.rect(screen, (255, 255, 255), robot_rect)
+    pg.display.update()
