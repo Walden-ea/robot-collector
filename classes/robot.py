@@ -6,6 +6,9 @@ from .sensor import Sensor
 from pygame import Vector2
 from . import helper
 
+from classes import pathfinder as pf
+from classes import map_item
+
 
 class Robot(pg.sprite.Sprite):
     '''
@@ -53,9 +56,14 @@ class Robot(pg.sprite.Sprite):
     def tick(self):
         for sensor in self.sensors:
             sensor.update_collision()
-        self.velocity = helper.to_velosity(nav_system.calc())
+        #self.velocity = helper.to_velosity(nav_system.calc(self, map_item.Map_item(0)))
+        # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
+        pfs = pf.Pathfinder(self)
+        pfs.go_to_target(self)
         # self.speed, self.direction = calc()
         self.decide_on_rubbish()
         self.perform_movement()
+        print("x loc:"+ str(self.x))
+        print("y loc:" + str(self.y))
 
 # TODO enum for patrol/going to container modes

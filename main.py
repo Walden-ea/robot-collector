@@ -4,6 +4,7 @@ import classes.robot as rb
 import classes.window as ww
 
 
+
 # you may refactor it however you please
 
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
@@ -29,6 +30,7 @@ def main():
         for i in pg.event.get():
             if i.type == pg.QUIT:
                 sys.exit()
+            robot.tick()
             ww.draw_background(screen, WINDOW_WIDTH, WINDOW_HIGHT)
             ww.draw_robot(screen, robot)
             clock.tick(fps)

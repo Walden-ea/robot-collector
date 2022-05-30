@@ -9,6 +9,7 @@ from .map_item import Map_item
 def calc(robot, map_item: Map_item):
     # Checking sensors when map_item is a piece of garbage
     # Returning fast speed
+    #todo а есть какие-нибудь доки для тегов(??
     if robot.sensors[0] <= 40 & robot.sensors[0] >= 18 & robot.sensors[1] <= 40 \
             & robot.sensors[1] >= 18 & robot.sensors[2] <= 40 & robot.sensors[2] >= 18 \
             & map_item.tag != 0:

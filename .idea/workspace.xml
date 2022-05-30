@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89b30ee7-4b0a-4b40-98fc-448140662193" name="Changes" comment="update robot behavior on each tick">
-      <change afterPath="$PROJECT_DIR$/classes/map.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classes/pathfinder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/robot-collector.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/robot-collector.iml" afterDir="false" />
+    <list default="true" id="89b30ee7-4b0a-4b40-98fc-448140662193" name="Changes" comment="Fix circular impord and add draw_robot func">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/map_item.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/map_item.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/nav_system.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/nav_system.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/pathfinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/pathfinder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/robot.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/robot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/sensor.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/sensor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/window.py" beforeDir="false" afterPath="$PROJECT_DIR$/classes/window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +23,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="29NQ7jUmGTKRhaFSreX2C0PHxCm" />
@@ -111,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652970042689</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fix circular impord and add draw_robot func">
+      <created>1653566075563</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1653566075563</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,7 +126,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/connecting" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -130,7 +149,8 @@
     <MESSAGE value="Set up pygame window and its loop" />
     <MESSAGE value="Add basic robot and its sensor classes" />
     <MESSAGE value="update robot behavior on each tick" />
-    <option name="LAST_COMMIT_MESSAGE" value="update robot behavior on each tick" />
+    <MESSAGE value="Fix circular impord and add draw_robot func" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix circular impord and add draw_robot func" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
