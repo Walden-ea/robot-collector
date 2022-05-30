@@ -4,8 +4,10 @@ import random
 import array as arr
 import classes.robot as rb
 import classes.window as ww
+
 import classes.map_item as mi
 import classes.wall as wl
+
 # you may refactor it however you please
 
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
@@ -43,6 +45,7 @@ def main():
         for i in pg.event.get():
             if i.type == pg.QUIT:
                 sys.exit()
+            robot.tick()
             ww.draw_background(screen, WINDOW_WIDTH, WINDOW_HIGHT)
             ww.draw_robot(screen, robot)
             ww.draw_walls(screen, wall1, 98,100)
