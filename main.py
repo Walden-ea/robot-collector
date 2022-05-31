@@ -1,8 +1,10 @@
 import pygame as pg
 import sys
+import random
 import classes.robot as rb
 import classes.window as ww
-
+import classes.map_item as mi
+import classes.wall as wl
 
 # you may refactor it however you please
 
@@ -15,13 +17,16 @@ import classes.window as ww
 WINDOW_WIDTH = 900
 WINDOW_HIGHT = 800
 
-
 def main():
     screen = pg.display.set_mode((1300, 800))
     fps = 60
     clock = pg.time.Clock()
 
     robot = rb.Robot(5, 75.0, x=WINDOW_WIDTH/2, y=WINDOW_HIGHT/2)
+    wall1 = wl.Wall(700,50)
+    wall2 = wl.Wall(50, 400)
+    wall3 = wl.Wall(350, 50)
+    garbage = mi.Map_item(0,0)
 
 
     pg.display.set_caption("Робот-сборщик мусора")
@@ -31,6 +36,10 @@ def main():
                 sys.exit()
             ww.draw_background(screen, WINDOW_WIDTH, WINDOW_HIGHT)
             ww.draw_robot(screen, robot)
+            ww.draw_walls(screen, wall1, 98,100)
+            ww.draw_walls(screen, wall2, 650, 200)
+            ww.draw_walls(screen, wall3, 100, 450)
+            ww.generate_garbage(screen,garbage);
             clock.tick(fps)
 
 
