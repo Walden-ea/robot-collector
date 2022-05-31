@@ -2,6 +2,7 @@ import pygame as pg
 import sys
 import classes.robot as rb
 import classes.window as ww
+import classes.nav_system as ns
 
 
 
@@ -33,6 +34,7 @@ def main():
             robot.tick()
             ww.draw_background(screen, WINDOW_WIDTH, WINDOW_HIGHT)
             ww.draw_robot(screen, robot)
+            robot.tick()
             clock.tick(fps)
 
 

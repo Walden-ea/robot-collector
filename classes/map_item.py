@@ -11,6 +11,6 @@ class Map_item(pg.sprite.Sprite):
     # initializing garbage
     def __init__(self, tag, volume=0):
         pg.sprite.Sprite.__init__(self)
-        self.rect = self.image.get_rect()
+        #self.rect = self.image.get_rect()
         self.tag = tag
         self.volume = volume

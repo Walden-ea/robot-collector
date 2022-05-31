@@ -18,5 +18,5 @@ def draw_background(screen, x, y):
 def draw_robot(screen,robot):
     #todo надо заморочиться чтобы он был круглым и вследствие этого придется еще заморочиться над коллизиями
     # эта штука обвиосли временная
-    screen.blit(robot.image, [300,300])
+    screen.blit(robot.image, [robot.x, robot.y])
     pg.display.update()

@@ -10,6 +10,7 @@ from classes import pathfinder as pf
 from classes import map_item
 
 
+
 class Robot(pg.sprite.Sprite):
     '''
     (todo docs)
@@ -30,8 +31,6 @@ class Robot(pg.sprite.Sprite):
             self.item_count = item_count
         if radius > 0:
             self.radius = radius
-        if sensor_count >= 0:
-            self.sensors = [Sensor(sensor_length, math.pi / 4), Sensor(sensor_length, 0), Sensor(sensor_length, -math.pi / 4)]
 
         # if (is_free(location,mask(self),radius)): TODO free space checker func if needed in future
 
@@ -45,6 +44,8 @@ class Robot(pg.sprite.Sprite):
             self.capacity = capacity
         self.image = pg.transform.scale(pg.image.load('robot.png').convert_alpha(), (50,50))
         self.rect = self.image.get_rect()
+        if sensor_count >= 0:
+            self.sensors = [Sensor(sensor_length, math.pi / 4, self), Sensor(sensor_length, 0, self), Sensor(sensor_length, -math.pi / 4, self)]
 
     def decide_on_rubbish(self):
         pass  # TODO implement
@@ -56,14 +57,19 @@ class Robot(pg.sprite.Sprite):
     def tick(self):
         for sensor in self.sensors:
             sensor.update_collision()
-        #self.velocity = helper.to_velosity(nav_system.calc(self, map_item.Map_item(0)))
+        calc_result = nav_system.calc(self, map_item.Map_item[0])
+        self.velocity = helper.to_velosity(calc_result)
         # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
         pfs = pf.Pathfinder(self)
         pfs.go_to_target(self)
         # self.speed, self.direction = calc()
         self.decide_on_rubbish()
         self.perform_movement()
+        for sensor in self.sensors:
+            sensor.update(calc_result[1], self.velocity)
         print("x loc:"+ str(self.x))
         print("y loc:" + str(self.y))
+
+
 
 # TODO enum for patrol/going to container modes
