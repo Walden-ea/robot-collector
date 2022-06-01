@@ -1,4 +1,5 @@
 import pygame as pg
+import random
 
 ROOM_CONSTRAINTS = pg.Rect(40, 40, 850, 710)
 
@@ -18,6 +19,19 @@ def draw_background(screen, x, y):
 def draw_robot(screen,robot):
     #todo надо заморочиться чтобы он был круглым и вследствие этого придется еще заморочиться над коллизиями
     # эта штука обвиосли временная
-    robot_rect = pg.Rect((robot.x, robot.y), (robot.radius,robot.radius))
-    pg.draw.rect(screen, (255, 255, 255), robot_rect)
+    screen.blit(robot.image, [300,300])
     pg.display.update()
+
+def draw_walls(screen,wall,x,y):
+    screen.blit(wall.image, [x, y])
+    pg.display.update()
+
+def generate_coords():
+    ok = False
+    while (not (ok)):
+        x = random.randint(42, 838)
+        y = random.randint(42, 698)
+        if (not (51 <= x <= 451 and 399 <= y <= 501) and not (49 <= y <= 151 and 45 <= x <= 801) and not (
+                149 <= y <= 602 and 599 <= x <= 701)):
+            ok = True
+    return (x, y)
