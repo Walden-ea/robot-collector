@@ -37,8 +37,9 @@ class Sensor(pg.sprite.Sprite):
     def check_collide(self, walls):
         pass
         for wall in walls:
-            if pg.sprite.collide_mask(self, wall):
-                self.distance =
+            collide = pg.sprite.collide_mask(self, wall)
+            if collide:
+                self.distance = self.length - collide[0]*collide[1]/2
                 self.collide_object = wall
         # process the collisions here
         pass  # collision = 15 etc.

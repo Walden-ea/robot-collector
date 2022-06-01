@@ -19,7 +19,7 @@ class Pathfinder:
         #self.spiral_count = 1 -- если пытаться протащить его по спирали, то какой-то говнокод получается так что я не буду
         x = robot.radius//2 + 1
         y = robot.radius // 2 + 1
-        if helper.can_be_placed_at(x,y):
+        if helper.can_be_placed_at(x, y):
             self.target_x = x
             self.target_y = y
         else: #todo надо тогда двигать, чо ниже заготовка чтобы оно не ругалось

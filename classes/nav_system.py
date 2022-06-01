@@ -7,111 +7,130 @@ from .map_item import Map_item
 
 # from .robot import Robot
 
+def check_sensors(robot):
+    # возвращаем 0 - стен нет, 1 - стена у первого сенсора, 2 - у второго,
+    # 3 - у третьего, 4 - стены у всех трёх сенсоров
+    if robot.sensors[0].collide_object is None and robot.sensors[1].collide_object is None \
+            and robot.sensors[2].collide_object is None:
+        return 0
+    elif robot.sensors[0].collide_object is not None and robot.sensors[1].collide_object is not None \
+            and robot.sensors[2].collide_object is not None:
+        return 4
+    elif robot.sensors[0].collide_object is not None and robot.sensors[1].collide_object is None \
+            and robot.sensors[2].collide_object is None:
+        return 1
+    elif robot.sensors[0].collide_object is None and robot.sensors[1].collide_object is not None \
+            and robot.sensors[2].collide_object is None:
+        return 2
+    else:
+        return 3
+
 
 def calc(robot):
-
     # Checking sensors when map_item is a piece of garbage
     # Returning fast speed
-    # todo а есть какие-нибудь доки для тегов(??
-    if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 40.0 >= robot.sensors[2].distance >= 18.0 \
-            and map_item.tag != 0:
+    # todo а есть какие-нибудь доки для тегов(??)
+    if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and \
+            40.0 >= robot.sensors[2].distance >= 18.0:
         return fast_speed, no_angle()
 
     # Returning medium speed
-    if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 3):
         return medium_speed, turn_right()
-    if 40.0 >= robot.sensors[0].distance >= 18.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 40.0 >= robot.sensors[2].distance >= 18.0 \
-            and map_item.tag != 0:
+    if 40.0 >= robot.sensors[0].distance >= 18.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 40.0 >= \
+            robot.sensors[2].distance >= 18.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return medium_speed, no_angle()
-    if 20.0 >= robot.sensors[0].distance >= 13.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 40.0 >= robot.sensors[2].distance >= 18.0 \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 40.0 >= \
+            robot.sensors[2].distance >= 18.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 1):
         return medium_speed, turn_left()
-    if 20.0 >= robot.sensors[0].distance >= 13.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 40.0 >= robot.sensors[2].distance >= 18.0 \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 40.0 >= \
+            robot.sensors[2].distance >= 18.0 and \
+            (check_sensors(robot) != 0 or check_sensors(robot) != 1 or check_sensors(robot) != 2):
         return medium_speed, turn_left()
-    if 20.0 >= robot.sensors[0].distance >= 13.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return medium_speed, no_angle()
-    if 40.0 >= robot.sensors[0].distance >= 18.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 40.0 >= robot.sensors[0].distance >= 18.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and \
+            (check_sensors(robot) != 0 or check_sensors(robot) != 2 or check_sensors(robot) != 3):
         return medium_speed, turn_right()
 
     # Returning slow speed
-    if 20.0 >= robot.sensors[0].distance >= 13.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return slow_speed, no_angle()
-    if not (not (robot.sensors[0].distance <= 20.0) or not (robot.sensors[0].distance >= 13.0) or not (
-            20.0 >= robot.sensors[1].distance >= 13.0) or not (15.0 >= robot.sensors[2].distance >= 4)) \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 3):
         return slow_speed, turn_right()
-    if 20.0 >= robot.sensors[0].distance >= 13.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 and check_sensors(robot) != 2):
         return slow_speed, no_angle()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 1):
         return slow_speed, turn_left()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[
-        1].distance >= 4.0 and 20.0 >= robot.sensors[2].distance >= 13.0 \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 20.0 >= \
+            robot.sensors[2].distance >= 13.0 and \
+            (check_sensors(robot) != 0 or check_sensors(robot) != 1 or check_sensors(robot) != 2):
         return slow_speed, turn_left()
-    if not (not (robot.sensors[0].distance <= 15.0) or not (robot.sensors[0].distance >= 4.0) or not (
-            20.0 >= robot.sensors[1].distance >= 13.0) or not (15.0 >= robot.sensors[
-        2].distance >= 4.0)) \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return slow_speed, no_angle()
-    if 20.0 >= robot.sensors[0].distance >= 13.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag != 0:
+    if 20.0 >= robot.sensors[0].distance >= 13.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and \
+            (check_sensors(robot) != 0 or check_sensors(robot) != 2 or check_sensors(robot) != 3):
         return slow_speed, turn_right()
 
     # Returning very slow speed
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[
-        1].distance >= 4.0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return very_slow_speed, no_angle()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag != 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 1):
         return very_slow_speed, turn_left()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 and check_sensors(robot) != 2):
         return very_slow_speed, no_angle()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and (check_sensors(robot) != 0 or check_sensors(robot) != 3):
         return very_slow_speed, turn_right()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag != 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and \
+            (check_sensors(robot) != 0 or check_sensors(robot) != 1 or check_sensors(robot) != 2):
         return very_slow_speed, turn_left()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag != 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return very_slow_speed, no_angle()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag != 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and \
+            (check_sensors(robot) != 0 or check_sensors(robot) != 2 or check_sensors(robot) != 3):
         return very_slow_speed, turn_right()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag != 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return very_slow_speed, no_angle()
 
     # Now checking when map_item is actually a wall
-    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag == 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and check_sensors(robot) == 1:
         return very_slow_speed, rapidly_right()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag == 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and check_sensors(robot) == 2:
         return very_slow_speed, rapidly_right()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag == 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and check_sensors(robot) == 3:
         return very_slow_speed, rapidly_left()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= robot.sensors[2].distance >= 4.0 \
-            and map_item.tag != 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= \
+            robot.sensors[2].distance >= 4.0 and check_sensors(robot) == 1 and check_sensors(robot) == 2:
         return very_slow_speed, rapidly_right()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag == 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and \
+            (check_sensors(robot) == 4 or check_sensors(robot) == 1 and check_sensors(robot) == 3):
         return very_slow_speed, turnaround()
-    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag == 0:
+    if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and check_sensors(robot) == 2 and check_sensors(robot) == 3:
         return very_slow_speed, rapidly_left()
-    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= robot.sensors[2].distance >= 0 \
-            and map_item.tag == 0:
+    if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= \
+            robot.sensors[2].distance >= 0 and check_sensors(robot) == 4:
         return very_slow_speed, turnaround()
 
 
