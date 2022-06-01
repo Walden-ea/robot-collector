@@ -32,7 +32,7 @@ def main():
     fps = 60
     clock = pg.time.Clock()
 
-    robot = rb.Robot(5, radius=20.0, sensor_length=40, x=WINDOW_WIDTH / 2, y=WINDOW_HIGHT / 2)
+    robot = rb.Robot(5, 20.0,WINDOW_WIDTH, WINDOW_HIGHT, sensor_length=40, x=WINDOW_WIDTH / 2, y=WINDOW_HIGHT / 2)
     wall1 = wl.Wall(700, 50)
     wall2 = wl.Wall(50, 400)
     wall3 = wl.Wall(350, 50)
@@ -58,7 +58,7 @@ def main():
         robot.tick()
         clock.tick(fps)
         pg.display.update()
-        sleep(3)
+        #sleep(3)
 
 
 if __name__ == '__main__':

@@ -19,6 +19,8 @@ class Robot(pg.sprite.Sprite):
     def __init__(self,
                  item_count: int,  # todo я забыла что такое айтем каунт и зачем он нужен
                  radius: float,
+                 win_width: int,
+                 win_height: int,
                  sensor_count: int = 3,
                  sensor_length: float = 10.0,
                  x: float = 0,
@@ -30,6 +32,7 @@ class Robot(pg.sprite.Sprite):
             self.item_count = item_count
         if radius > 0:
             self.radius = radius
+        self.pfs  = pf.Pathfinder(self, win_height, win_width)
 
         # if (is_free(location,mask(self),radius)): TODO free space checker func if needed in future
 
@@ -56,6 +59,14 @@ class Robot(pg.sprite.Sprite):
         self.y = self.y + self.velocity.y
 
     def tick(self):
+        #calc_result = nav_system.calc(self)
+        #self.velocity = helper.to_velosity(calc_result)
+        #for sensor in self.sensors:
+        #    sensor.update(calc_result[1], self.velocity)
+        # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
+        #self.pfs.go_to_target(self)
+        self.pfs.set_velocity(self)
+        # self.speed, self.direction = calc()
         calc_result = nav_system.calc(self)
         self.velocity = helper.to_velosity(calc_result)
         self.perform_movement()
@@ -64,9 +75,9 @@ class Robot(pg.sprite.Sprite):
         for sensor in self.sensors:
             sensor.update(calc_result[1], self.velocity)
 
-        pfs = pf.Pathfinder(self)
-        pfs.go_to_target(self)
+        self.pfs.go_to_target(self)
         self.decide_on_rubbish()
+        self.perform_movement()
         print("x loc:" + str(self.x))
         print("y loc:" + str(self.y))
 
