@@ -17,6 +17,7 @@ class Sensor(pg.sprite.Sprite):
         self.start_x = robot.x
         self.start_y = robot.y - robot.radius
         self.robot_radius = robot.radius
+        self.robot_rotate = 0
         self.angle = angle
         self.length = length
         self.distance = length
@@ -26,6 +27,7 @@ class Sensor(pg.sprite.Sprite):
 
     def update(self, rotate_angle, velocity):
         self.image.fill(0)
+        self.robot_rotate += rotate_angle
         h = self.robot_radius * math.sin(rotate_angle)
         self.start_x += h * abs(math.sin((180 - rotate_angle) / 2))
         self.start_y += h * abs(math.cos((180 - rotate_angle) / 2))
@@ -39,7 +41,9 @@ class Sensor(pg.sprite.Sprite):
         for wall in walls:
             collide = pg.sprite.collide_mask(self, wall)
             if collide:
-                self.distance = self.length - collide[0]*collide[1]/2
                 self.collide_object = wall
-        # process the collisions here
+                if math.pi / 2 <= self.robot_rotate < 3 * math.pi / 2:
+                    self.distance = self.length - math.sqrt(collide[0] ^ 2 + collide[1] ^ 2)
+                elif 3 * math.pi / 2 <= self.robot_rotate <= math.radians(0) or math.radians(0) <= self.robot_rotate <= math.pi / 2:
+                    self.distance = math.sqrt(collide[0] ^ 2 + collide[1] ^ 2)
         pass  # collision = 15 etc.
