@@ -10,7 +10,6 @@ from classes import pathfinder as pf
 from classes import map_item
 
 
-
 class Robot(pg.sprite.Sprite):
     '''
     (todo docs)
@@ -34,18 +33,20 @@ class Robot(pg.sprite.Sprite):
 
         # if (is_free(location,mask(self),radius)): TODO free space checker func if needed in future
 
-        self.x = x
-        self.y = y
+        self.x = x - 40
+        self.y = y - 40
         # self.direction = direction
         # if speed >= 0:
         #    self.speed = speed
         self.velocity = velocity
         if capacity > 0:
             self.capacity = capacity
-        self.image = pg.transform.scale(pg.image.load('robot.png').convert_alpha(), (50,50))
+        self.image = pg.Surface((850, 710)).convert_alpha()
         self.rect = self.image.get_rect()
+        pg.draw.circle(self.image, (255, 255, 0), (self.x, self.y), self.radius)
         if sensor_count >= 0:
-            self.sensors = [Sensor(sensor_length, math.pi / 4, self), Sensor(sensor_length, 0, self), Sensor(sensor_length, -math.pi / 4, self)]
+            self.sensors = [Sensor(sensor_length, math.radians(45), self), Sensor(sensor_length, math.radians(0), self),
+                            Sensor(sensor_length, math.radians(-45), self)]
 
     def decide_on_rubbish(self):
         pass  # TODO implement
@@ -57,17 +58,16 @@ class Robot(pg.sprite.Sprite):
     def tick(self):
         calc_result = nav_system.calc(self)
         self.velocity = helper.to_velosity(calc_result)
+        self.perform_movement()
+        self.image.fill(0)
+        pg.draw.circle(self.image, (255, 255, 0), (self.x, self.y), self.radius)
         for sensor in self.sensors:
             sensor.update(calc_result[1], self.velocity)
-        # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
+
         pfs = pf.Pathfinder(self)
         pfs.go_to_target(self)
-        # self.speed, self.direction = calc()
         self.decide_on_rubbish()
-        self.perform_movement()
         print("x loc:" + str(self.x))
         print("y loc:" + str(self.y))
-
-
 
 # TODO enum for patrol/going to container modes
