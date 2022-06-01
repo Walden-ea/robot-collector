@@ -8,7 +8,8 @@ from .map_item import Map_item
 # from .robot import Robot
 
 
-def calc(robot, map_item: Map_item):
+def calc(robot):
+
     # Checking sensors when map_item is a piece of garbage
     # Returning fast speed
     # todo а есть какие-нибудь доки для тегов(??

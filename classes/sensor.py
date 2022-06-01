@@ -21,6 +21,7 @@ class Sensor(pg.sprite.Sprite):
         self.length = length
         self.distance = length
         pg.draw.line(self.image, (255, 255, 0), (self.start_x, self.start_y), (self.start_x + self.x, self.start_y - robot.radius - self.y))
+        self.collide_object = None
         # collision = math.inf #todo check if you are allowed to have int at the first tick
 
     def update(self, rotate_angle, velocity):
@@ -33,6 +34,11 @@ class Sensor(pg.sprite.Sprite):
         pg.draw.line(self.image, (255, 255, 0), (self.start_x, self.start_y), new_x, new_y)
         self.mask = pg.mask.from_surface(self.image)
 
-    def update_collision(self):
+    def check_collide(self, walls):
+        pass
+        for wall in walls:
+            if pg.sprite.collide_mask(self, wall):
+                self.distance =
+                self.collide_object = wall
         # process the collisions here
         pass  # collision = 15 etc.

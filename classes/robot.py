@@ -55,19 +55,17 @@ class Robot(pg.sprite.Sprite):
         self.y = self.y + self.velocity.y
 
     def tick(self):
-        for sensor in self.sensors:
-            sensor.update_collision()
-        calc_result = nav_system.calc(self, map_item.Map_item[0])
+        calc_result = nav_system.calc(self)
         self.velocity = helper.to_velosity(calc_result)
+        for sensor in self.sensors:
+            sensor.update(calc_result[1], self.velocity)
         # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
         pfs = pf.Pathfinder(self)
         pfs.go_to_target(self)
         # self.speed, self.direction = calc()
         self.decide_on_rubbish()
         self.perform_movement()
-        for sensor in self.sensors:
-            sensor.update(calc_result[1], self.velocity)
-        print("x loc:"+ str(self.x))
+        print("x loc:" + str(self.x))
         print("y loc:" + str(self.y))
 
 
