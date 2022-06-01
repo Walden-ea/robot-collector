@@ -35,7 +35,7 @@ class Pathfinder:
 
     #def set_up_spiral_movement(self, Robot): куда разумнее вбить метод движения к цели (любой) и потом уже отдельно выбирать цель
 
-    def go_to_target(self,robot):  # todo возможно проще координаты робота хранить в виде вектора я хз
+    def go_to_target(self, robot):  # todo возможно проще координаты робота хранить в виде вектора я хз
         v = (math.Vector2(self.target_x, self.target_y) - math.Vector2(robot.x, robot.y))
         print("dest: "+ str(v.x)+", "+str(v.y))
         # v.scale_to_length((math.Vector2(robot.velocity)).length()) todo раскомментировать когда разберемся с навсистемой
