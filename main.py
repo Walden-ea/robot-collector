@@ -6,7 +6,6 @@ import classes.robot as rb
 import classes.window as ww
 import classes.map_item as mi
 import classes.wall as wl
-import classes.wall2 as wl2
 # you may refactor it however you please
 
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
@@ -33,8 +32,10 @@ def main():
     wall1 = wl.Wall(700,50)
     wall2 = wl.Wall(50, 400)
     wall3 = wl.Wall(350, 50)
-    wall4 = wl2.Wall2(50, 50)
-    garbage = mi.Map_item(0,0)
+
+    garb = []
+    for i in range(num):
+        garb.append(mi.Map_item(random.randint(0,2)))
 
 
     pg.display.set_caption("Робот-сборщик мусора")
@@ -47,9 +48,8 @@ def main():
             ww.draw_walls(screen, wall1, 98,100)
             ww.draw_walls(screen, wall2, 650, 200)
             ww.draw_walls(screen, wall3, 100, 450)
-            ww.draw_walls2(screen, wall4, 701, 502)
             for i in range(num):
-                garbage.update(screen,coords[i][0], coords[i][1])
+                garb[i].update(screen,coords[i][0], coords[i][1])
             clock.tick(fps)
 
 

@@ -26,10 +26,6 @@ def draw_walls(screen,wall,x,y):
     screen.blit(wall.image, [x, y])
     pg.display.update()
 
-def draw_walls2(screen,wall2,x,y):
-    screen.blit(wall2.image, [x, y])
-    pg.display.update()
-
 def generate_coords():
     ok = False
     while (not (ok)):
