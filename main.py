@@ -58,7 +58,7 @@ def main():
         robot.tick()
         clock.tick(fps)
         pg.display.update()
-        sleep(3)
+        sleep(1)
 
 
 if __name__ == '__main__':
