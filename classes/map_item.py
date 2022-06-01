@@ -1,20 +1,26 @@
+import pygame as pg
+import random
+from .helper import item_picture
 
 
-class Map_item:
+class Map_item(pg.sprite.Sprite):
     '''
     (todo docs)
     classes for a garbage
     '''
-    item_sprites = [] # предметы должны как-то отображаться в окошке, я предлагаю соответственно тэгу присваивать спрайт.
-    # Каким бы он ни был todo разобраться с отображением спрайтов
 
     # initializing garbage
-    def __init__(self, volume, tag):
-        if tag == 0:
-            self.tag = tag
-            self.volume = 0
-        else:
-            self.tag = tag
-            self.volume = volume
+    def __init__(self, tag, image = 0, volume=0):
+        pg.sprite.Sprite.__init__(self)
+        self.image = pg.transform.scale(pg.image.load(item_picture[tag]).convert_alpha(),(50,50))
+        self.rect = self.image.get_rect()
+        self.tag = tag
+        self.volume = volume
+
+    def update(self, screen, x,y):
+        screen.blit(self.image, [x, y])
+        pg.display.update()
+
+
 
 

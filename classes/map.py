@@ -4,5 +4,5 @@ class Map:
     todo docs
     '''
     def __init__(self):
-        # todo создать генерацию карты
+        pg.sprite.Sprite.__init__(self)
         pass
