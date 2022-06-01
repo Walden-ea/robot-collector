@@ -35,12 +35,12 @@ class Pathfinder:
         y = robot.radius + robot.radius // 5
         self.roaming_targets.append((x,y))  # robot.radius//5 -- это своего рода припуск
         # экспериментальный
+        direction = 1  # направление, 1 -- вправо, -1 -- влево
         while y < self.win_height - (3*robot.radius + robot.radius//5):
-            direction = 1  # направление, 1 -- вправо, -1 -- влево
             x = x+direction*(self.win_width - robot.radius*2)
             if direction == -1:
                 y += robot.radius
-            self.roaming_targets.append(())
+            self.roaming_targets.append((x,y))
             direction *= -1
 
     def start_roaming(self):
@@ -56,26 +56,28 @@ class Pathfinder:
         print("dest: "+ str(v.x)+", "+str(v.y))
         # v.scale_to_length((math.Vector2(robot.velocity)).length()) todo раскомментировать когда разберемся с навсистемой
         v.scale_to_length(10)
-        print("dest scaled: "+ str(v.x)+", "+str(v.y))
+        print("dest scaled: " + str(v.x)+", "+str(v.y))
         robot.velocity = v
         print(self.target_x)
         print(self.target_y)
         print(robot.velocity)
 
-    def roam(self):
-        self.target_x, self.target_y = self.roaming_targets[self.target_num]
-        if self.target_num == len(self.roaming_targets - 1):
-            self.target_num = 0
-        else:
-            self.target_num += 1
-
+    def roam(self, robot):
+        if math.Vector2(self.target_x, self.target_y).distance_to(math.Vector2(robot.x, robot.y)) < (robot.radius//4):
+            self.target_x, self.target_y = self.roaming_targets[self.target_num]
+            if self.target_num == len(self.roaming_targets)-1:
+                self.roaming_targets.reverse()
+                self.target_num = 0
+            else:
+                self.target_num += 1
+        self.go_to_target(robot)
 
     def carry(self):
         pass
 
-    def set_velocity(self):
+    def set_velocity(self, robot):
         if self.mode == Mode.ROAMING:
-            self.roam()
+            self.roam(robot)
         else:
             self.carry()
 

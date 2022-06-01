@@ -63,7 +63,8 @@ class Robot(pg.sprite.Sprite):
         #for sensor in self.sensors:
         #    sensor.update(calc_result[1], self.velocity)
         # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
-        self.pfs.go_to_target(self)
+        #self.pfs.go_to_target(self)
+        self.pfs.set_velocity(self)
         # self.speed, self.direction = calc()
         self.decide_on_rubbish()
         self.perform_movement()

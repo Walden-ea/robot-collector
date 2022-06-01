@@ -54,7 +54,9 @@ def main():
             #for sensor in robot.sensors:
             #    print(pg.sprite.collide_mask(sensor, wall1))
             #    sensor.check_collide([wall1, wall2, wall3])
-            robot.tick(WINDOW_HIGHT,WINDOW_WIDTH)
+            #robot.x+=1
+            #robot.y+=1
+            robot.tick()
         clock.tick(fps)
 
 
