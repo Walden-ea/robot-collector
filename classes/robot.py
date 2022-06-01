@@ -13,7 +13,7 @@ class Robot:
     '''
 
     def __init__(self,
-            item_count: int,
+            item_count: int, #todo я забыла что такое айтем каунт и зачем он нужен
             radius: float,
             sensor_count: int = 3,
             sensor_length: float = 10.0,

@@ -128,7 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#for pycharm
+#-------------------------
 .idea/workspace.xml
 usage.statistics.xml
 shelf/
+.idea/workspace.xml
+

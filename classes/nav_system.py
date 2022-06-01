@@ -3,10 +3,10 @@ import math
 from scipy import integrate
 
 from .map_item import Map_item
-from .robot import Robot
+#from .robot import Robot
 
 
-def calc(robot: Robot, map_item: Map_item):
+def calc(robot, map_item: Map_item):
     # Checking sensors when map_item is a piece of garbage
     # Returning fast speed
     if robot.sensors[0] <= 40 & robot.sensors[0] >= 18 & robot.sensors[1] <= 40 \
@@ -170,7 +170,7 @@ def speed_medium():
         return x * (v5 - x) / 2
 
     def f3(x):
-        return x(x - v3) / 2
+        return x * (x - v3) / 2
 
     integral1 = integrate.quad(func=f1, a=v3, b=v6)
     integral2 = integrate.quad(func=f2, a=v6, b=v5)
@@ -188,7 +188,7 @@ def speed_slow():
         return x * (v4 - x) / 2
 
     def f3(x):
-        return x(x - v2) / 2
+        return x * (x - v2) / 2
 
     integral1 = integrate.quad(func=f1, a=v1, b=v4)
     integral2 = integrate.quad(func=f2, a=v4, b=v3)
