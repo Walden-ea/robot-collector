@@ -9,19 +9,7 @@ import classes.window as ww
 
 import classes.map_item as mi
 import classes.wall as wl
-
-
-class Player(pg.sprite.Sprite):
-    def __init__(self):
-        super().__init__()
-        self.image = pg.Surface((40, 40))
-        self.image.fill('red')
-        self.rect = self.image.get_rect(center=(300, 300))
-        self.mask = pg.mask.from_surface(self.image)
-
-    def update(self):
-        if pg.mouse.get_pos():
-            self.rect.center = pg.mouse.get_pos()
+import classes.container as ct
 
 
 
@@ -30,7 +18,7 @@ class Player(pg.sprite.Sprite):
 # from classes import window
 
 
-WINDOW_WIDTH = 1300
+WINDOW_WIDTH = 900
 WINDOW_HIGHT = 800
 pg.init()
 screen = pg.display.set_mode((1300, 800))
@@ -41,7 +29,7 @@ coords = ([0, 0] * num)
 for i in range(num):
     coords[i] = ww.generate_coords()
 
-player = pg.sprite.GroupSingle(Player())
+
 
 def main():
 
@@ -57,35 +45,50 @@ def main():
 
 
     garb = []
+    cont = []
     for i in range(num):
         garb.append(mi.Map_item(random.randint(0, 2)))
+    for i in range(3):
+        cont.append(ct.Container(i, ww.generate_coords()[0],ww.generate_coords()[1]))
 
     pg.display.set_caption("Робот-сборщик мусора")
+
+    new_garb = []
+    new_garb_coords = []
     while True:
+
         for i in pg.event.get():
             if i.type == pg.QUIT:
                 sys.exit()
+            if i.type == pg.MOUSEBUTTONUP:
+                new_garb.append(mi.Map_item(random.randint(0, 2)))
+                new_garb_coords.append(pg.mouse.get_pos())
+                pass
         ww.draw_background(screen, WINDOW_WIDTH, WINDOW_HIGHT)
         ww.draw_robot(screen, robot)
-        #ww.draw_walls(screen, wall1, 98, 100)
-        #ww.draw_walls(screen, wall2, 650, 200)
-        #ww.draw_walls(screen, wall3, 100, 450)
-        for i in range(num):
-            garb[i].update(screen, coords[i][0], coords[i][1]) # todo ЗАМЕНИТЕ АПДЕЙТ НА ЧТО-НИБУДЬ ЧТОБЫ ОНО НЕ МИГАЛО АПДЕЙТ МИГАЕТ
+        ww.draw_walls(screen, wall1)
+        ww.draw_walls(screen, wall2)
+        ww.draw_walls(screen, wall3)
+        for i_g in range(num):
+            garb[i_g].update(screen, coords[i_g][0], coords[i_g][1])
+        for i_g in range(len(new_garb)):
+            garb[i_g].update(screen, new_garb_coords[i_g][0], new_garb_coords[i_g][1]) #todo проверить почему не больше 4х
+            print("i_g: "+str(i_g))
+            print("ngc: " + str(len(new_garb_coords)))
+        for c in cont:
+            screen.blit(c.image, [c.pos_x, c.pos_y])
         for sensor in robot.sensors:
             sensor.check_collide([wall1, wall2, wall3])
         robot.go()
-        player.update()
-        player.draw(screen)
         #obstacle.draw(screen)
-        for wall in walls.sprites():
-            pg.sprite.GroupSingle(wall).draw(screen)
+        # for wall in walls.sprites():
+        #     pg.sprite.GroupSingle(wall).draw(screen)
         # collision
-
-        if pg.sprite.spritecollide(player.sprite, walls, False, pg.sprite.collide_mask):
-            player.sprite.image.fill('green')
-        else:
-            player.sprite.image.fill('red')
+        for s in robot.sensors:
+            if pg.sprite.spritecollide(s, walls, False, pg.sprite.collide_mask):
+                print("collides")
+            else:
+                print("doesn't collide")
         clock.tick(fps)
         pg.display.update()
         #sleep(3)

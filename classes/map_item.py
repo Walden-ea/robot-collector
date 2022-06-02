@@ -15,11 +15,11 @@ class Map_item(pg.sprite.Sprite):
         self.image = pg.transform.scale(pg.image.load(item_picture[tag]).convert_alpha(),(50,50))
         self.rect = self.image.get_rect()
         self.tag = tag
-        self.volume = volume
+        self.volume = tag+1
 
-    def update(self, screen, x,y):
+    def update(self, screen, x, y):
         screen.blit(self.image, [x, y])
-        pg.display.update()
+        #pg.display.update()
 
 
 

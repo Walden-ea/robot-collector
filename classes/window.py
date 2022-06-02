@@ -25,8 +25,8 @@ def draw_robot(screen,robot):
         screen.blit(sensor.image, [40, 40])
     #pg.display.update()
 
-def draw_walls(screen,wall,x,y):
-    screen.blit(wall.image, [x, y])
+def draw_walls(screen,wall):
+    screen.blit(wall.image, [wall.pos_x, wall.pos_y])
     #pg.display.update()
 
 def generate_coords():

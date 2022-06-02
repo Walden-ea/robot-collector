@@ -58,7 +58,7 @@ class Sensor(pg.sprite.Sprite):
         self.start_y += h * math.sin((180 - abs(rotate_angle)) / 2) + velocity.y
         self.x = self.length * math.cos(self.angle)
         self.y = self.length * math.sin(self.angle)
-        pg.draw.line(self.image, (255, 255, 0), (self.start_x, self.start_y), (self.start_x + self.x, self.start_y + self.y))
+        pg.draw.line(self.image, (255, 255, 0), (self.start_x, self.start_y), (self.start_x + self.x, self.start_y + self.y),2)
         self.mask = pg.mask.from_surface(self.image)
 
     def check_collide(self, walls):

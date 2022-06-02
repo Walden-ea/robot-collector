@@ -67,7 +67,7 @@ class Robot(pg.sprite.Sprite):
         #self.pfs.go_to_target(self)
         #self.pfs.set_velocity(self)
         calc_result = nav_system.calc(self)
-        #self.velocity = helper.to_velosity(calc_result)
+        self.velocity = helper.to_velosity(calc_result)
         self.pfs.set_velocity(self)
         self.perform_movement()
         self.image.fill(0)

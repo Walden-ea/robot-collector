@@ -35,14 +35,14 @@ class Pathfinder:
     def set_list_of_targets(self, robot):
         x = robot.radius+ robot.radius//5
         y = robot.radius + robot.radius // 5
-        self.roaming_targets.append((x,y))  # robot.radius//5 -- это своего рода припуск
+        self.roaming_targets.append((x, y))  # robot.radius//5 -- это своего рода припуск
         # экспериментальный
         direction = 1  # направление, 1 -- вправо, -1 -- влево
         while y < self.win_height - (3*robot.radius + robot.radius//5):
             x = x+direction*(self.win_width - robot.radius*2)
             if direction == -1:
-                y += robot.radius
-            self.roaming_targets.append((x,y))
+                y += 2*robot.radius
+            self.roaming_targets.append((x, y))
             direction *= -1
 
     def start_roaming(self):
@@ -51,7 +51,6 @@ class Pathfinder:
     def start_carrying(self):
         self.mode = Mode.CARRYING
 
-    #def set_up_spiral_movement(self, Robot): куда разумнее вбить метод движения к цели (любой) и потом уже отдельно выбирать цель
 
     def go_to_target(self, robot):  # todo возможно проще координаты робота хранить в виде вектора я хз
         v = (math.Vector2(self.target_x, self.target_y) - math.Vector2(robot.x, robot.y))
@@ -66,14 +65,15 @@ class Pathfinder:
 
     def roam(self, robot):
         if math.Vector2(self.target_x, self.target_y).distance_to(math.Vector2(robot.x, robot.y)) < robot.radius:
-            robot.velocity = math.Vector2(0,0)
-            # self.target_x, self.target_y = self.roaming_targets[self.target_num]
-            # if self.target_num == len(self.roaming_targets)-1:
-            #     self.roaming_targets.reverse()
-            #     self.target_num = 0
-            # else:
-            #     self.target_num += 1
+            #robot.velocity = math.Vector2(0,0)
+            self.target_x, self.target_y = self.roaming_targets[self.target_num]
+            if self.target_num == len(self.roaming_targets)-1:
+                self.roaming_targets.reverse()
+                self.target_num = 0
+            else:
+                self.target_num += 1
         self.go_to_target(robot)
+        print(self.target_x,self.target_y)
 
     def carry(self):
         pass
