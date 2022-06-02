@@ -52,7 +52,7 @@ class Robot(pg.sprite.Sprite):
                             Sensor(sensor_length, math.radians(-45), self)]
 
     def decide_on_rubbish(self):
-        pass  # TODO implement
+        pass
 
     def perform_movement(self):
         self.x = self.x + self.velocity.x
@@ -77,5 +77,3 @@ class Robot(pg.sprite.Sprite):
 
         print("x loc:" + str(self.x))
         print("y loc:" + str(self.y))
-
-# TODO enum for patrol/going to container modes

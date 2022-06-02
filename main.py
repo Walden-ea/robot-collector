@@ -88,11 +88,13 @@ def main():
         ww.draw_walls(screen, wall2)
         ww.draw_walls(screen, wall3)
         for i_g in range(num):
-            garb[i_g].update(screen, coords[i_g][0], coords[i_g][1])
+            if garb[i_g] in garb_group:
+                garb[i_g].update(screen, coords[i_g][0], coords[i_g][1])
         for i_g in range(len(new_garb)):
-            garb[i_g].update(screen, new_garb_coords[i_g][0], new_garb_coords[i_g][1]) #todo проверить почему не больше 4х
-            print("i_g: "+str(i_g))
-            print("ngc: " + str(len(new_garb_coords)))
+            if new_garb[i_g] in garb_group:
+                new_garb[i_g].update(screen, new_garb_coords[i_g][0], new_garb_coords[i_g][1]) #todo проверить почему не больше 4х
+            #print("i_g: "+str(i_g))
+            #print("ngc: " + str(len(new_garb_coords)))
         for c in cont:
             screen.blit(c.image, [c.pos_x, c.pos_y])
 
