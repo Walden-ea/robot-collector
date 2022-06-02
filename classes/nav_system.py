@@ -12,20 +12,26 @@ def check_sensors(robot):
     # 3 - у третьего, 4 - стены у всех трёх сенсоров, 5 - ошибка
     if robot.sensors[0].collide_object is None and robot.sensors[1].collide_object is None \
             and robot.sensors[2].collide_object is None:
+        print('0')
         return 0
     elif robot.sensors[0].collide_object is not None and robot.sensors[1].collide_object is not None \
             and robot.sensors[2].collide_object is not None:
+        print('4')
         return 4
     elif robot.sensors[0].collide_object is not None and robot.sensors[1].collide_object is None \
             and robot.sensors[2].collide_object is None:
+        print('1')
         return 1
     elif robot.sensors[0].collide_object is None and robot.sensors[1].collide_object is not None \
             and robot.sensors[2].collide_object is None:
+        print('2')
         return 2
     elif robot.sensors[0].collide_object is None and robot.sensors[1].collide_object is None \
             and robot.sensors[2].collide_object is not None:
+        print('3')
         return 3
     else:
+        print('Error')
         return 5
 
 
@@ -34,10 +40,10 @@ def calc(robot):
     # Returning fast speed
     if 40.0 <= robot.sensors[0].distance and 40.0 <= robot.sensors[1].distance and \
             40.0 <= robot.sensors[2].distance :
-        return fast_speed, no_angle()
+        return medium_speed, no_angle()
     if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and \
             40.0 >= robot.sensors[2].distance >= 18.0:
-        return fast_speed, no_angle()
+        return medium_speed, no_angle()
 
     # Returning medium speed
     if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and 20.0 >= \
@@ -69,7 +75,7 @@ def calc(robot):
             robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 3):
         return slow_speed, turn_right()
     if 20.0 >= robot.sensors[0].distance >= 13.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 20.0 >= \
-            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 and check_sensors(robot) != 2):
+            robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return slow_speed, no_angle()
     if 15.0 >= robot.sensors[0].distance >= 4.0 and 20.0 >= robot.sensors[1].distance >= 13.0 and 20.0 >= \
             robot.sensors[2].distance >= 13.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 1):
@@ -144,9 +150,6 @@ def calc(robot):
         return very_slow_speed, no_angle()
 
 
-
-
-
     # Returning very slow speed
     if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 15.0 >= \
             robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
@@ -155,7 +158,7 @@ def calc(robot):
             robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 1):
         return very_slow_speed, turn_left()
     if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= \
-            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 and check_sensors(robot) != 2):
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) != 0 or check_sensors(robot) != 2):
         return very_slow_speed, no_angle()
     if 15.0 >= robot.sensors[0].distance >= 4.0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= \
             robot.sensors[2].distance >= 0 and (check_sensors(robot) != 0 or check_sensors(robot) != 3):
@@ -207,14 +210,14 @@ def calc(robot):
             robot.sensors[2].distance >= 0 and check_sensors(robot) == 3:
         return very_slow_speed, rapidly_left()
     if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 15.0 >= \
-            robot.sensors[2].distance >= 4.0 and check_sensors(robot) == 1 and check_sensors(robot) == 2:
+            robot.sensors[2].distance >= 4.0 and (check_sensors(robot) == 1 or check_sensors(robot) == 2):
         return very_slow_speed, rapidly_right()
     if 8.0 >= robot.sensors[0].distance >= 0 and 15.0 >= robot.sensors[1].distance >= 4.0 and 8.0 >= \
             robot.sensors[2].distance >= 0 and \
-            (check_sensors(robot) == 4 or check_sensors(robot) == 1 and check_sensors(robot) == 3):
+            (check_sensors(robot) == 4 or check_sensors(robot) == 1 or check_sensors(robot) == 3):
         return very_slow_speed, turnaround()
     if 15.0 >= robot.sensors[0].distance >= 4.0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= \
-            robot.sensors[2].distance >= 0 and check_sensors(robot) == 2 and check_sensors(robot) == 3:
+            robot.sensors[2].distance >= 0 and (check_sensors(robot) == 2 or check_sensors(robot) == 3):
         return very_slow_speed, rapidly_left()
     if 8.0 >= robot.sensors[0].distance >= 0 and 8.0 >= robot.sensors[1].distance >= 0 and 8.0 >= \
             robot.sensors[2].distance >= 0 and check_sensors(robot) == 4:
@@ -298,13 +301,13 @@ def calc(robot):
 
 
 v_min = 0
-v1 = 7
-v2 = 6
-v3 = 15.0
-v4 = 12
-v5 = 20.0
-v6 = 18.0
-v_max = 30
+v1 = 2
+v2 = 3
+v3 = 5
+v4 = 6
+v5 = 8
+v6 = 9
+v_max = 11
 
 
 # Functions for speed
