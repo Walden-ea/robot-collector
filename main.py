@@ -108,27 +108,33 @@ def main():
         player.draw(screen)
 
         # collision
-        if pg.sprite.spritecollide(player.sprite, walls, False, pg.sprite.collide_mask):
-            print("collides")
-            player.sprite.image.fill('green')
-        elif pg.sprite.spritecollide(player.sprite, garb_group, False, pg.sprite.collide_mask):
-            print("COLLIDES")
-            player.sprite.image.fill('blue')
-        elif pg.sprite.spritecollide(player.sprite, container_group, False, pg.sprite.collide_mask):
-            print("CONTAINER")
-            player.sprite.image.fill('yellow')
-        else:
-            player.sprite.image.fill('red')
-        # for s in robot.sensors:
-        #     if pg.sprite.spritecollide(player.sprite, walls, False, pg.sprite.collide_mask):
-        #         print("collides")
-        #         player.sprite.image.fill('green')
-        #     if pg.sprite.spritecollide(player.sprite, garb_group, False, pg.sprite.collide_mask):
-        #         print("COLLIDES")
-        #         player.sprite.image.fill('blue')
-        #     if pg.sprite.spritecollide(player.sprite, container_group, False, pg.sprite.collide_mask):
-        #         print("CONTAINER")
-        #         player.sprite.image.fill('yellow')
+        for s in robot.sensors:
+            if pg.sprite.spritecollide(s, walls, False, pg.sprite.collide_mask):
+                print("collides")
+                player.sprite.image.fill('green')
+            elif pg.sprite.spritecollide(s, garb_group, True, pg.sprite.collide_mask):
+                print("COLLIDES")
+                player.sprite.image.fill('blue')
+            elif pg.sprite.spritecollide(s, container_group, False, pg.sprite.collide_mask):
+                print("CONTAINER")
+                player.sprite.image.fill('yellow')
+            else:
+                player.sprite.image.fill('red')
+
+
+        #это мышкой проверка
+        # if pg.sprite.spritecollide(player.sprite, walls, False, pg.sprite.collide_mask):
+        #     print("collides")
+        #     player.sprite.image.fill('green')
+        # elif pg.sprite.spritecollide(player.sprite, garb_group, False, pg.sprite.collide_mask):
+        #     print("COLLIDES")
+        #     player.sprite.image.fill('blue')
+        # elif pg.sprite.spritecollide(player.sprite, container_group, False, pg.sprite.collide_mask):
+        #     print("CONTAINER")
+        #     player.sprite.image.fill('yellow')
+        # else:
+        #     player.sprite.image.fill('red')
+
         clock.tick(fps)
         pg.display.update()
         #sleep(3)
