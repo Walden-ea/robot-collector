@@ -62,13 +62,18 @@ class Sensor(pg.sprite.Sprite):
         self.mask = pg.mask.from_surface(self.image)
 
     def check_collide(self, walls):
-        for wall in walls:
-            pass
-            # collide = pg.sprite.collide_mask(self, wall)
-            # if pg.sprite.collide_mask(self, wall):
-            #     self.collide_object = wall
-            #     if math.pi / 2 <= self.robot_rotate < 3 * math.pi / 2:
-            #         self.distance = self.length - math.sqrt(collide[0] ^ 2 + collide[1] ^ 2)
-            #     elif 3 * math.pi / 2 <= self.robot_rotate <= math.radians(0) or math.radians(0) <= self.robot_rotate <= math.pi / 2:
-            #         self.distance = math.sqrt(collide[0] ^ 2 + collide[1] ^ 2)
+            if pg.sprite.spritecollide(self, walls, False, pg.sprite.collide_mask):
+                W = walls.sprites()
+                W1 = pg.sprite.collide_mask(self, W[0])
+                W2 = pg.sprite.collide_mask(self, W[1])
+                W3 = pg.sprite.collide_mask(self, W[2])
+
+                print('COLLIDE ', W1, W2, W3)
+                wall = W1 or W2 or W3
+
+                self.collide_object = wall
+                if math.pi / 2 <= self.robot_rotate < 3 * math.pi / 2:
+                    self.distance = self.length - math.sqrt(wall[0] ^ 2 + wall[1] ^ 2)
+                elif 3 * math.pi / 2 <= self.robot_rotate <= math.radians(0) or math.radians(0) <= self.robot_rotate <= math.pi / 2:
+                    self.distance = math.sqrt(wall[0] ^ 2 + wall[1] ^ 2)
                     # collision = 15 etc.
