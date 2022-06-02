@@ -3,7 +3,7 @@ import pygame as pg
 
 
 def to_velosity(calc_result):
-    return pg.Vector2(calc_result[0] * math.cos(calc_result[1]), calc_result[0] * math.sin(calc_result[1]))
+    return pg.Vector2(calc_result[0] * math.cos(calc_result[1]), calc_result[0] * math.sin(calc_result[1])) #todo разобраться почему оно получает none из навсистемы
 
 
 def can_be_placed_at(x,y):  # нам много где нужна будет функция которая будет проверять

@@ -16,8 +16,10 @@ class Pathfinder:
     '''
     def __init__(self, robot, height, width):
         self.mode = Mode.ROAMING
-        x = robot.radius + 5
-        y = robot.radius + 5
+        #x = robot.radius + 5
+        #y = robot.radius + 5
+        x = 800
+        y = 400
         if helper.can_be_placed_at(x,y):
             self.target_x = x
             self.target_y = y
@@ -54,8 +56,8 @@ class Pathfinder:
     def go_to_target(self, robot):  # todo возможно проще координаты робота хранить в виде вектора я хз
         v = (math.Vector2(self.target_x, self.target_y) - math.Vector2(robot.x, robot.y))
         print("dest: "+ str(v.x)+", "+str(v.y))
-        # v.scale_to_length((math.Vector2(robot.velocity)).length()) todo раскомментировать когда разберемся с навсистемой
-        v.scale_to_length(10)
+        #v.scale_to_length((math.Vector2(robot.velocity)).length()) todo когда почините навсистему
+        v.scale_to_length(5)
         print("dest scaled: " + str(v.x)+", "+str(v.y))
         robot.velocity = v
         print(self.target_x)
@@ -63,13 +65,14 @@ class Pathfinder:
         print(robot.velocity)
 
     def roam(self, robot):
-        if math.Vector2(self.target_x, self.target_y).distance_to(math.Vector2(robot.x, robot.y)) < (robot.radius//4):
-            self.target_x, self.target_y = self.roaming_targets[self.target_num]
-            if self.target_num == len(self.roaming_targets)-1:
-                self.roaming_targets.reverse()
-                self.target_num = 0
-            else:
-                self.target_num += 1
+        if math.Vector2(self.target_x, self.target_y).distance_to(math.Vector2(robot.x, robot.y)) < robot.radius:
+            robot.velocity = math.Vector2(0,0)
+            # self.target_x, self.target_y = self.roaming_targets[self.target_num]
+            # if self.target_num == len(self.roaming_targets)-1:
+            #     self.roaming_targets.reverse()
+            #     self.target_num = 0
+            # else:
+            #     self.target_num += 1
         self.go_to_target(robot)
 
     def carry(self):

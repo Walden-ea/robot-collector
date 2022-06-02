@@ -12,21 +12,22 @@ def draw_background(screen, x, y):
     pg.draw.rect(screen, (0, 0, 0), (950, 40, 300, 710), 2)
     pg.font.init()
     my_font = pg.font.SysFont('Comic Sans MS', 30)
-    text_log = my_font.render('Лог', True, (0, 0, 0))
+    small_font = pg.font.SysFont('Comic Sans MS', 28)
+    text_log = my_font.render('Лог\n', True, (0, 0, 0))
+    if pg.mouse.get_pos():
+        pos_log = small_font.render('mouse pos:'+str(pg.mouse.get_pos()), True, (0, 0, 0))
+        screen.blit(pos_log,(960,110))
     screen.blit(text_log, (1075 , 40))
-    pg.display.update()
 
 def draw_robot(screen,robot):
-    #todo надо заморочиться чтобы он был круглым и вследствие этого придется еще заморочиться над коллизиями
-    # эта штука обвиосли временная
     screen.blit(robot.image, [40,40])
     for sensor in robot.sensors:
         screen.blit(sensor.image, [40, 40])
-    pg.display.update()
+    #pg.display.update()
 
 def draw_walls(screen,wall,x,y):
     screen.blit(wall.image, [x, y])
-    pg.display.update()
+    #pg.display.update()
 
 def generate_coords():
     ok = False
