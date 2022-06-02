@@ -64,16 +64,16 @@ class Robot(pg.sprite.Sprite):
         #for sensor in self.sensors:
         #    sensor.update(calc_result[1], self.velocity)
         # пока не разберемся с сенсорами мап айтемами (и логикой подбора хехе) -- придется закомментить
-        #self.pfs.go_to_target(self)
+
         #self.pfs.set_velocity(self)
         calc_result = nav_system.calc(self)
         self.velocity = helper.to_velosity(calc_result)
-        self.pfs.set_velocity(self)
+        angle = self.pfs.set_velocity(self)
         self.perform_movement()
         self.image.fill(0)
         pg.draw.circle(self.image, (255, 255, 0), (self.x, self.y), self.radius)
         for sensor in self.sensors:
-            sensor.update(calc_result[1], self.velocity)
+            sensor.update(calc_result[1] + angle, self.velocity)
 
         print("x loc:" + str(self.x))
         print("y loc:" + str(self.y))

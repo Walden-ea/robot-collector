@@ -48,7 +48,7 @@ def main():
     fps = 60
     clock = pg.time.Clock()
 
-    robot = rb.Robot(5, 20.0,WINDOW_WIDTH, WINDOW_HIGHT, sensor_length=40, x=WINDOW_WIDTH / 2, y=WINDOW_HIGHT / 2)
+    robot = rb.Robot(5, 15.0,WINDOW_WIDTH, WINDOW_HIGHT, sensor_length=40, x=WINDOW_WIDTH / 2, y=WINDOW_HIGHT / 2)
     wall1 = wl.Wall(98, 100,700, 50)
     wall2 = wl.Wall( 650, 200, 50, 400)
     wall3 = wl.Wall( 100, 450, 350, 50)

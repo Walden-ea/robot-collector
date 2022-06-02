@@ -18,16 +18,17 @@ def draw_background(screen, x, y):
         pos_log = small_font.render('mouse pos:'+str(pg.mouse.get_pos()), True, (0, 0, 0))
         screen.blit(pos_log,(960,110))
     screen.blit(text_log, (1075 , 40))
+    pg.display.update()
 
 def draw_robot(screen,robot):
     screen.blit(robot.image, [40,40])
     for sensor in robot.sensors:
         screen.blit(sensor.image, [40, 40])
-    #pg.display.update()
+    pg.display.update()
 
 def draw_walls(screen,wall):
     screen.blit(wall.image, [wall.pos_x, wall.pos_y])
-    #pg.display.update()
+    pg.display.update()
 
 def generate_coords():
     ok = False
