@@ -18,7 +18,7 @@ class Sensor(pg.sprite.Sprite):
         self.rect = self.image.get_rect(center=(425, 355))
         self.start_x = robot.x + robot.radius
         self.start_y = robot.y
-        self.robot_position = pg.math.Vector2(robot.x,robot.y)
+        self.robot_position = pg.math.Vector2(robot.x, robot.y)
         self.robot_radius = robot.radius
         self.robot_rotate = math.radians(0)
         self.angle = angle
@@ -58,22 +58,27 @@ class Sensor(pg.sprite.Sprite):
         self.start_y += h * math.sin((180 - abs(rotate_angle)) / 2) + velocity.y
         self.x = self.length * math.cos(self.angle)
         self.y = self.length * math.sin(self.angle)
-        pg.draw.line(self.image, (255, 255, 0), (self.start_x, self.start_y), (self.start_x + self.x, self.start_y + self.y),2)
+        pg.draw.line(self.image, (255, 255, 0), (self.start_x, self.start_y), (self.start_x + self.x, self.start_y + self.y), 2)
         self.mask = pg.mask.from_surface(self.image)
 
     def check_collide(self, walls):
-            if pg.sprite.spritecollide(self, walls, False, pg.sprite.collide_mask):
-                W = walls.sprites()
-                W1 = pg.sprite.collide_mask(self, W[0])
-                W2 = pg.sprite.collide_mask(self, W[1])
-                W3 = pg.sprite.collide_mask(self, W[2])
+        self.mask = pg.mask.from_surface(self.image)
+        if pg.sprite.spritecollide(self, walls, False, pg.sprite.collide_mask):
+            W = walls.sprites()
+            W1 = pg.sprite.collide_mask(self, W[0])
+            W2 = pg.sprite.collide_mask(self, W[1])
+            W3 = pg.sprite.collide_mask(self, W[2])
 
-                print('COLLIDE ', W1, W2, W3)
-                wall = W1 or W2 or W3
-
-                self.collide_object = wall
-                if math.pi / 2 <= self.robot_rotate < 3 * math.pi / 2:
-                    self.distance = self.length - math.sqrt(wall[0] ^ 2 + wall[1] ^ 2)
-                elif 3 * math.pi / 2 <= self.robot_rotate <= math.radians(0) or math.radians(0) <= self.robot_rotate <= math.pi / 2:
-                    self.distance = math.sqrt(wall[0] ^ 2 + wall[1] ^ 2)
-                    # collision = 15 etc.
+            print('COLLIDE ', W1, W2, W3)
+            wall = W1 or W2 or W3
+            if W1:
+                self.collide_object = W[0]
+            elif W2:
+                self.collide_object = W[1]
+            elif W3:
+                self.collide_object = W[2]
+            if math.pi / 2 <= self.robot_rotate < 3 * math.pi / 2:
+                self.distance = self.length - math.sqrt(wall[0] ^ 2 + wall[1] ^ 2)
+            elif 3 * math.pi / 2 <= self.robot_rotate <= math.radians(0) or math.radians(0) <= self.robot_rotate <= math.pi / 2:
+                self.distance = math.sqrt(wall[0] ^ 2 + wall[1] ^ 2)
+                # collision = 15 etc.

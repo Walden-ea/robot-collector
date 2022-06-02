@@ -22,7 +22,7 @@ class Robot(pg.sprite.Sprite):
                  win_width: int,
                  win_height: int,
                  sensor_count: int = 3,
-                 sensor_length: float = 10.0,
+                 sensor_length: float = 40.0,
                  x: float = 0,
                  y: float = 0,
                  velocity: Vector2 = (0, 0),
@@ -45,7 +45,7 @@ class Robot(pg.sprite.Sprite):
         if capacity > 0:
             self.capacity = capacity
         self.image = pg.Surface((850, 710), pg.SRCALPHA, 32).convert_alpha()
-        self.rect = self.image.get_rect(center=(850+self.radius//2, 300+self.radius//2))
+        self.rect = self.image.get_rect(center=(425, 355))
         pg.draw.circle(self.image, (255, 255, 0), (self.x, self.y), self.radius)
         if sensor_count >= 0:
             self.sensors = [Sensor(sensor_length, math.radians(45), self), Sensor(sensor_length, math.radians(0), self),

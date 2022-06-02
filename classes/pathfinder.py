@@ -55,8 +55,8 @@ class Pathfinder:
     def go_to_target(self, robot):  # todo возможно проще координаты робота хранить в виде вектора я хз
         v = (math.Vector2(self.target_x, self.target_y) - math.Vector2(robot.x, robot.y))
         print("dest: "+ str(v.x)+", "+str(v.y))
-        #v.scale_to_length((math.Vector2(robot.velocity)).length()) todo когда почините навсистему
-        v.scale_to_length(5)
+        v.scale_to_length((math.Vector2(robot.velocity)).length()) #todo когда почините навсистему
+        #v.scale_to_length(5)
         print("dest scaled: " + str(v.x)+", "+str(v.y))
         robot.velocity = v
         print(self.target_x)

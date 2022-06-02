@@ -32,6 +32,9 @@ def check_sensors(robot):
 def calc(robot):
     # Checking sensors when map_item is a piece of garbage
     # Returning fast speed
+    if 40.0 <= robot.sensors[0].distance and 40.0 <= robot.sensors[1].distance and \
+            40.0 <= robot.sensors[2].distance :
+        return fast_speed, no_angle()
     if 40.0 >= robot.sensors[0].distance >= 18.0 and 40.0 >= robot.sensors[1].distance >= 18.0 and \
             40.0 >= robot.sensors[2].distance >= 18.0:
         return fast_speed, no_angle()
