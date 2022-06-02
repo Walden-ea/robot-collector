@@ -11,7 +11,17 @@ import classes.map_item as mi
 import classes.wall as wl
 import classes.container as ct
 
+class Player(pg.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.image = pg.Surface((40, 40))
+        self.image.fill('red')
+        self.rect = self.image.get_rect(center=(300, 300))
+        self.mask = pg.mask.from_surface(self.image)
 
+    def update(self):
+        if pg.mouse.get_pos():
+            self.rect.center = pg.mouse.get_pos()
 
 # а может тут это в класс painter завернуть чтобы не передавать постоянно х и у not my business tho
 # from classes import robot
@@ -22,6 +32,7 @@ WINDOW_WIDTH = 900
 WINDOW_HIGHT = 800
 pg.init()
 screen = pg.display.set_mode((1300, 800))
+player = pg.sprite.GroupSingle(Player())
 
 num = random.randint(3, 5)
 coords = ([0, 0] * num)
@@ -47,22 +58,29 @@ def main():
     garb = []
     cont = []
     for i in range(num):
-        garb.append(mi.Map_item(random.randint(0, 2)))
+        garb.append(mi.Map_item(random.randint(0, 2),coords[i][0], coords[i][1]))
     for i in range(3):
         cont.append(ct.Container(i, ww.generate_coords()[0],ww.generate_coords()[1]))
+    container_group = pg.sprite.Group()
+    for c in cont:
+        container_group.add(c)
 
     pg.display.set_caption("Робот-сборщик мусора")
 
     new_garb = []
     new_garb_coords = []
+    garb_group = pg.sprite.Group()
+    garb_group.add(garb)
     while True:
 
         for i in pg.event.get():
             if i.type == pg.QUIT:
                 sys.exit()
             if i.type == pg.MOUSEBUTTONUP:
-                new_garb.append(mi.Map_item(random.randint(0, 2)))
-                new_garb_coords.append(pg.mouse.get_pos())
+                mouse_pos = pg.mouse.get_pos()
+                new_garb_coords.append(mouse_pos)
+                new_garb.append(mi.Map_item(random.randint(0, 2), mouse_pos[0], mouse_pos[1]))
+                garb_group.add(new_garb[len(new_garb)-1])
                 pass
         ww.draw_background(screen, WINDOW_WIDTH, WINDOW_HIGHT)
         ww.draw_robot(screen, robot)
@@ -77,6 +95,7 @@ def main():
             print("ngc: " + str(len(new_garb_coords)))
         for c in cont:
             screen.blit(c.image, [c.pos_x, c.pos_y])
+
         for sensor in robot.sensors:
             sensor.check_collide([wall1, wall2, wall3])
         robot.go()
@@ -84,11 +103,32 @@ def main():
         # for wall in walls.sprites():
         #     pg.sprite.GroupSingle(wall).draw(screen)
         # collision
-        for s in robot.sensors:
-            if pg.sprite.spritecollide(s, walls, False, pg.sprite.collide_mask):
-                print("collides")
-            else:
-                print("doesn't collide")
+        # updating and drawing
+        player.update()
+        player.draw(screen)
+
+        # collision
+        if pg.sprite.spritecollide(player.sprite, walls, False, pg.sprite.collide_mask):
+            print("collides")
+            player.sprite.image.fill('green')
+        elif pg.sprite.spritecollide(player.sprite, garb_group, False, pg.sprite.collide_mask):
+            print("COLLIDES")
+            player.sprite.image.fill('blue')
+        elif pg.sprite.spritecollide(player.sprite, container_group, False, pg.sprite.collide_mask):
+            print("CONTAINER")
+            player.sprite.image.fill('yellow')
+        else:
+            player.sprite.image.fill('red')
+        # for s in robot.sensors:
+        #     if pg.sprite.spritecollide(player.sprite, walls, False, pg.sprite.collide_mask):
+        #         print("collides")
+        #         player.sprite.image.fill('green')
+        #     if pg.sprite.spritecollide(player.sprite, garb_group, False, pg.sprite.collide_mask):
+        #         print("COLLIDES")
+        #         player.sprite.image.fill('blue')
+        #     if pg.sprite.spritecollide(player.sprite, container_group, False, pg.sprite.collide_mask):
+        #         print("CONTAINER")
+        #         player.sprite.image.fill('yellow')
         clock.tick(fps)
         pg.display.update()
         #sleep(3)
